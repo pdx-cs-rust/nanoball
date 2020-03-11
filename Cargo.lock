@@ -90,6 +90,7 @@ name = "nanoball"
 version = "0.1.0"
 dependencies = [
  "embedded-graphics",
+ "embedded-hal",
  "gd32vf103xx-hal",
  "longan-nano",
  "panic-halt",
