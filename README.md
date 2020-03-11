@@ -6,6 +6,9 @@ Sipeed
 [Longan Nano](https://www.seeedstudio.com/Sipeed-Longan-Nano-RISC-V-GD32VF103CBT6-Development-Board-p-4205.html)
 RISC-V embedded board.
 
+Here's a [video](https://youtu.be/huwbYqZ2chk) showing the
+code being developed.
+
 ## Build and Run
 
 Currently only tried on Linux host. You are on your own
