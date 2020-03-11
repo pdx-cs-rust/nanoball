@@ -1,0 +1,14 @@
+[package]
+name = "nanoball"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+gd32vf103xx-hal = "0.2.3"
+riscv-rt = "0.6.1"
+panic-halt = "0.2.0"
+embedded-graphics = "0.5"
+
+[dependencies.longan-nano]
+version = "0.1.1"
+features = ["lcd"]
