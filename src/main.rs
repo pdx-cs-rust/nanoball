@@ -67,11 +67,12 @@ fn main() -> ! {
     let mut dx = 0.6f32;
     let mut dy = 0.8f32;
     let mut c = 0;
+    let m = 8 * leds.len();
     loop {
         // Change LED color.
-        leds[c].off();
-        c = (c + 1) % leds.len();
-        leds[c].on();
+        leds[c / 8].off();
+        c = (c + 1) % m;
+        leds[c / 8].on();
 
         // Get integer coords.
         let ileft = left as i32;
