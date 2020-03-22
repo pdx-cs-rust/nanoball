@@ -11,6 +11,7 @@ use gd32vf103xx_hal::prelude::*;
 use gd32vf103xx_hal::delay::McycleDelay;
 use longan_nano::lcd_pins;
 use longan_nano::lcd::Lcd;
+use longan_nano::led::{Led, rgb};
 use embedded_hal::blocking::delay::DelayMs;
 use embedded_graphics::prelude::*;
 use embedded_graphics::pixelcolor::Rgb565;
@@ -36,6 +37,10 @@ fn main() -> ! {
 
     let gpioa = dp.GPIOA.split(&mut rcu);
     let gpiob = dp.GPIOB.split(&mut rcu);
+    let gpioc = dp.GPIOC.split(&mut rcu);
+
+    let (mut red, mut green, mut blue) = rgb(gpioc.pc13, gpioa.pa1, gpioa.pa2);
+    let mut leds: [&mut dyn Led; 3] = [&mut red, &mut green, &mut blue];
 
     let lcd_pins = lcd_pins!(gpioa, gpiob);
     let mut lcd = Lcd::new(dp.SPI0, lcd_pins, &mut rcu);
@@ -43,6 +48,11 @@ fn main() -> ! {
     let (ball_width, ball_height) = (4, 4);
 
     let mut delay = McycleDelay::new(&rcu.clocks);
+
+    // Blacken LEDs
+    for c in &mut leds {
+        c.off();
+    }
 
     // Clear screen
     draw_rect(
@@ -56,9 +66,17 @@ fn main() -> ! {
     let mut top = 1.0f32;
     let mut dx = 0.6f32;
     let mut dy = 0.8f32;
+    let mut c = 0;
     loop {
+        // Change LED color.
+        leds[c].off();
+        c = (c + 1) % leds.len();
+        leds[c].on();
+
+        // Get integer coords.
         let ileft = left as i32;
         let itop = top as i32;
+
         // Erase ball.
         draw_rect(
             &mut lcd,
