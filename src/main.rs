@@ -52,34 +52,38 @@ fn main() -> ! {
         0u16,
     );
 
-    let mut left = 1;
-    let mut top = 1;
-    let mut dx = 1;
-    let mut dy = 1;
+    let mut left = 1.0f32;
+    let mut top = 1.0f32;
+    let mut dx = 0.6f32;
+    let mut dy = 0.8f32;
     loop {
+        let ileft = left as i32;
+        let itop = top as i32;
         // Erase ball.
         draw_rect(
             &mut lcd,
-            (left, top),
-            (left + ball_width - 1, top + ball_height - 1),
+            (ileft, itop),
+            (ileft + ball_width - 1, itop + ball_height - 1),
             0u16,
         );
 
         // Update ball position.
-        if left <= 0 || left + ball_width >= width {
+        if ileft <= 0 || ileft + ball_width >= width {
             dx = -dx;
         }
         left += dx;
-        if top <= 0 || top + ball_height >= height {
+        if itop <= 0 || itop + ball_height >= height {
             dy = -dy;
         }
         top += dy;
+        let ileft = left as i32;
+        let itop = top as i32;
 
         // Draw ball.
         draw_rect(
             &mut lcd,
-            (left, top),
-            (left + ball_width - 1, top + ball_height - 1),
+            (ileft, itop),
+            (ileft + ball_width - 1, itop + ball_height - 1),
             0xffffu16,
         );
 
