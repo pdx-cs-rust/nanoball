@@ -67,12 +67,22 @@ fn main() -> ! {
     let mut dx = 0.6f32;
     let mut dy = 0.8f32;
     let mut c = 0;
-    let m = 8 * leds.len();
+    let m = 64 * leds.len();
+    static BALL_COLORS: [u16; 8] = [
+        (0x03 << 11) + (0x00 << 5) + 0x07,
+        (0x07 << 11) + (0x00 << 5) + 0x03,
+        (0x1f << 11) + (0x00 << 5) + 0x00,
+        (0x07 << 11) + (0x03 << 5) + 0x00,
+        (0x03 << 11) + (0x07 << 5) + 0x00,
+        (0x00 << 11) + (0x1f << 5) + 0x03,
+        (0x00 << 11) + (0x07 << 5) + 0x07,
+        (0x00 << 11) + (0x03 << 5) + 0x1f,
+    ];
     loop {
         // Change LED color.
-        leds[c / 8].off();
+        leds[c / 64].off();
         c = (c + 1) % m;
-        leds[c / 8].on();
+        leds[c / 64].on();
 
         // Get integer coords.
         let ileft = left as i32;
@@ -103,7 +113,7 @@ fn main() -> ! {
             &mut lcd,
             (ileft, itop),
             (ileft + ball_width - 1, itop + ball_height - 1),
-            0xffffu16,
+            BALL_COLORS[c / 24],
         );
 
         // Delay to show ball.
