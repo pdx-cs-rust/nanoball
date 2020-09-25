@@ -16,23 +16,34 @@ for others.
 
 ### Setup
 
-    rustup target add riscv32imac-unknown-none-elf
+* Get the Rust compiler for this chipset.
 
-Now grab and install the Sipeed tools from the links
-below. Sadly stock Debian `dfu-util` does not appear to work
-with this board.
+        rustup target add riscv32imac-unknown-none-elf
 
-    cargo build --release
-    sh mkbin.sh
+* Grab and install the Sipeed tools from the links
+  below. Sadly stock Debian `dfu-util` does not appear to
+  work with this board.
 
-Now hook your Longan Nano to your box via USB and reset it
-by holding down the "BOOT" button, then pressing and
-releasing the "RESET" button.
+* Compile the demo.
 
-    sh dfuload.sh
+        sh mkbin.sh nanoball
 
-You may need to power the Nano down and back up
-afterward. At that point, the ball should be bouncing!
+* Hook your Longan Nano to your box via USB. The loader
+  doesn't cope well with USB hubs, so hook directly to your
+  host's USB.
+
+* Reset the Longan Nano by holding down the "BOOT" button
+  (the taller one in the standard case, on the right when
+  USB port is at the bottom), then pressing and releasing
+  the "RESET" button (the other one).
+
+* Upload the demo. 
+
+        sh dfuload.sh nanoball
+
+  You may need to power the Nano down and back up afterward.
+
+Now the ball should be bouncing!
 
 ## Resources
 
