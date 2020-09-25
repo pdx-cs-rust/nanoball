@@ -17,5 +17,6 @@ case "$BUILDMODE" in
 esac
 cargo build $BUILDFLAG "$@" &&
 riscv-nuclei-elf-objcopy -O binary \
+  --only-section=.text --only-section=.rodata \
   target/riscv32imac-unknown-none-elf/$BUILDMODE/$TARGET \
   $TARGET.bin
