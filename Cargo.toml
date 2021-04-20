@@ -4,14 +4,14 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
-gd32vf103xx-hal = "0.2.3"
-riscv-rt = "0.6.1"
+gd32vf103xx-hal = "0.4.0"
+riscv-rt = "0.8.0"
 panic-halt = "0.2.0"
-embedded-graphics = "0.5"
-embedded-hal = "0.2.3"
+embedded-graphics = "0.6.2"
+embedded-hal = "0.2.4"
 
 [dependencies.longan-nano]
-version = "0.1.1"
+version = "0.2.0"
 features = ["lcd"]
 
 [profile.dev]
