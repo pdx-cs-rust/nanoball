@@ -1,4 +1,7 @@
 #!/bin/sh
+# XXX Obsolete binary build script.
+# Use `cargo objcopy` instead: see the README
+# in this distribution.
 if [ $# -eq 0 ]
 then
     echo "mkbin.sh: usage: mkbin.sh binary [buildmode]" >&2

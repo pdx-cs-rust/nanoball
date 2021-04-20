@@ -1,0 +1,2 @@
+# FT232 - USB <-> Serial Converter
+ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", GROUP="bart"
