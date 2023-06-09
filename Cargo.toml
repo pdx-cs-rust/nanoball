@@ -1,18 +1,17 @@
 [package]
 name = "nanoball"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 
 [dependencies]
-gd32vf103xx-hal = "0.5.0"
-riscv-rt = "0.11.0"
-panic-halt = "0.2.0"
-embedded-graphics = "0.8.0"
+gd32vf103xx-hal = "0.5"
+riscv-rt = "0.11"
+panic-halt = "0.2"
+embedded-graphics = "0.7"
 embedded-hal = "0.2.7"
 
 [dependencies.longan-nano]
-path = "/local/src/old/longan-nano"
-# version = "0.3.0"
+version = "0.3"
 features = ["lcd"]
 
 [profile.dev]
