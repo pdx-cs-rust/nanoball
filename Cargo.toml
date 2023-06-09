@@ -4,7 +4,6 @@ version = "0.1.2"
 edition = "2021"
 
 [dependencies]
-gd32vf103xx-hal = "0.5"
 riscv-rt = "0.11"
 panic-halt = "0.2"
 embedded-graphics = "0.7"
