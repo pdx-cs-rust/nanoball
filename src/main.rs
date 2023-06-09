@@ -13,19 +13,19 @@ use longan_nano::led::{Led, rgb};
 use embedded_hal::blocking::delay::DelayMs;
 use embedded_graphics::prelude::*;
 use embedded_graphics::pixelcolor::{Rgb565, raw::RawU16};
-use embedded_graphics::primitives::Rectangle;
-use embedded_graphics::primitive_style;
+use embedded_graphics::primitives::{Rectangle, PrimitiveStyleBuilder, Styled};
 
 fn draw_rect<C>(lcd: &mut Lcd, ul: (i32, i32), lr: (i32, i32), c: C)
     where C: Into<Rgb565>
 {
-    let rect =  Rectangle::new(
-        Point::new(ul.0, ul.1),
-        Point::new(lr.0, lr.1),
-    );
-    let _ = rect
-        .into_styled(primitive_style!(fill_color = c.into()))
-        .draw(lcd);
+    let tl = Point::new(ul.0, ul.1);
+    let size = Size::new((lr.0 - ul.0) as u32, (lr.1 - ul.1) as u32);
+    let rect =  Rectangle::new(tl, size);
+    let style = PrimitiveStyleBuilder::new()
+        .fill_color(c.into())
+        .build();
+    let srect = Styled::new(rect, style);
+    let _ = srect.draw(lcd);
 }
 
 #[entry]
@@ -70,6 +70,7 @@ fn main() -> ! {
     let mut dy = 0.8f32;
     let mut c = 0;
     let m = 64 * leds.len();
+    #[allow(clippy::identity_op)]
     static BALL_COLORS: [u16; 8] = [
         (0x03 << 11) + (0x00 << 5) + 0x07,
         (0x07 << 11) + (0x00 << 5) + 0x03,
